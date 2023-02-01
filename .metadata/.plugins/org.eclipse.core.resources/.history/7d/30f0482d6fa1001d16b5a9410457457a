@@ -1,0 +1,93 @@
+package com.ionix.testdev.business;
+
+import java.util.HashMap;
+import java.util.Map;
+
+import org.apache.http.HttpStatus;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpMethod;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Component;
+import org.springframework.web.client.RestTemplate;
+import org.springframework.web.util.UriComponentsBuilder;
+
+import com.google.gson.Gson;
+import com.ionix.testdev.dto.ResponseRUTValidation;
+import com.ionix.testdev.responses.ResultResponse;
+import com.ionix.testdev.services.CipherService;
+import com.ionix.testdev.utils.ConvertDTO;
+
+@Component
+public class RutValidationBusinnes {
+
+	@Autowired
+	CipherService cipherService;
+	
+	@Autowired
+	RestTemplate restTemplate;
+	
+	@Autowired
+	ConvertDTO convertDTO;
+	
+	@Autowired
+	CipherService cipherService;
+
+	private UriComponentsBuilder uri;
+	
+	@Value("${rut.service.path}")
+	private String urlRutValidation;
+	
+	
+	@Value("${rut.service.xapikey}")
+	private String xApiKey;
+
+	
+	public ResponseEntity<?> getRUTValidate(String rut) {
+		
+		long startTimeTry = System.currentTimeMillis();	
+		
+		ResponseEntity<?> resp = serviceConsume(rut);
+		long endTimeConn = System.currentTimeMillis() - startTimeTry;
+
+		if (resp.getStatusCode().value() == HttpStatus.SC_OK) {
+			
+			ResponseRUTValidation result = new Gson().fromJson(resp.getBody().toString(), ResponseRUTValidation.class);
+			
+			ResultResponse response = mapperResponse(endTimeConn, result);
+			
+			return new ResponseEntity<ResultResponse>(response,null,HttpStatus.SC_OK);		
+
+		}
+
+		return resp;
+		
+	}
+
+
+	private ResultResponse mapperResponse(long endTimeConn, ResponseRUTValidation result) {
+		ResultResponse response = new ResultResponse();
+		response.setResponseCode(result.getResponseCode());
+		response.setDescription(result.getDescription());
+		response.setElapsedTime((int) endTimeConn);
+		response.getResult().setRegisterCount((int) result.getResult().getItems().size());
+		return response;
+	}
+
+
+	private ResponseEntity<?> serviceConsume(String rut) {
+		HttpHeaders headers = new HttpHeaders();
+		headers.add("X-API-Key", xApiKey);
+		headers.setContentType(MediaType.APPLICATION_JSON);
+		HttpEntity<Object> entity = new HttpEntity<>(headers);
+		this.uri = UriComponentsBuilder.fromHttpUrl(urlRutValidation + rut);
+		ResponseEntity<?> resp = restTemplate.exchange(uri.toUriString(), HttpMethod.GET, entity, String.class);
+		return resp;
+	}
+	
+	
+	
+}

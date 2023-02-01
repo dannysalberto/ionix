@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename type &apos;com.ionix.testdev.UserControllerTests&apos; to &apos;ControllerTests&apos;&#x0D;&#x0A;- Original project: &apos;testdev&apos;&#x0D;&#x0A;- Original element: &apos;com.ionix.testdev.UserControllerTests&apos;&#x0D;&#x0A;- Renamed element: &apos;com.ionix.testdev.ControllerTests&apos;&#x0D;&#x0A;- Update references to refactored element&#x0D;&#x0A;- Update textual occurrences in comments and strings" description="Rename type &apos;UserControllerTests&apos;" flags="589830" id="org.eclipse.jdt.ui.rename.type" input="/src\/test\/java=/gradle_scope=/test=/=/gradle_used_by_scope=/test=/=/test=/true=/&lt;com.ionix.testdev{UserControllerTests.java[UserControllerTests" matchStrategy="1" name="ControllerTests" qualified="false" references="true" similarDeclarations="false" stamp="1675211130917" textual="false" version="1.0"/>
+</session>

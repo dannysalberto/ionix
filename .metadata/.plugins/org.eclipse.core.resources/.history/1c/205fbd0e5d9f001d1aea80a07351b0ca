@@ -1,0 +1,24 @@
+package com.ionix.testdev.exceptions;
+
+
+public class SQLExceptionCustom  extends Exception {
+	
+	 /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	public SQLExceptionCustom(){
+	        super();
+	    }
+
+	    public SQLExceptionCustom(String message) {
+	        super(message);
+	    }
+
+	    public SQLExceptionCustom(Throwable cause) {
+	        super(cause);
+	    }
+
+
+}

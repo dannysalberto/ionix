@@ -1,0 +1,20 @@
+package com.ionix.testdev.responses;
+
+import lombok.Data;
+
+@Data
+public class ResultResponse {
+
+	public String responseCode;
+    public String description;
+    public int elapsedTime;
+    public Result result;
+    
+    @Data
+    private class Result{
+        public int registerCount;
+    }
+
+}
+
+

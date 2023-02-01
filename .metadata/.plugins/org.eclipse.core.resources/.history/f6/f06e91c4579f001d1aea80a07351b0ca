@@ -1,0 +1,7 @@
+package com.ionix.testdev.interfaces;
+
+public interface IUser {
+	
+	User saveUser(UserDTO user);
+
+}

@@ -1,0 +1,10 @@
+package com.ionix.testdev.dto;
+
+
+@Data
+public class Detail{
+    public String email;
+    public String phoneNumber;
+}
+
+

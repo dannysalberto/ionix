@@ -1,0 +1,40 @@
+package com.colsubsidio.purchaseorders.constants;
+
+public class CommonConstants {
+
+	public static final String NOTFOUND_CODE = "404";
+	public static final String SUCCESS_CODE = "200";
+	public static final String ERROR_CODE = "500";
+	public static final String BADREQUEST_CODE = "400";
+	
+	
+	public static final String NOTFOUND_MESSAGE = "No se encontró data";
+	public static final String SUCCESS_MESSAGE = "Proceso exitoso";
+	public static final String ERROR_MESSAGE = "Error Interno";
+	
+	public static final String NOT_EMPTY_NOT_NULL = " no debe ser nulo o vacio";
+	public static final String ID_FIELD = "Nit ";
+	public static final String NIT_FIELD = "Nit ";
+	public static final String NAME_FIELD = "Nombre ";
+	public static final String ADDRESS_FIELD = "Dirección ";
+	public static final String PHONE_FIELD = "Teléfono ";
+	public static final String DESCRIPTION_FIELD = "Descripción ";
+	public static final String DATEDELIVERY_FIELD = "Fecha de entrega ";
+	public static final String SUPPLIER_FIELD = "Proveedor ";
+	public static final String DISPENSARY_FIELD = "Dispensario ";
+	public static final String STATE_FIELD = "Estado ";
+
+	public static final String EMAIL_NOT_VALID = "Debe indicar un email válido ";
+	
+	public static final String ZONE_ID = "America/Los_Angeles";
+	public static final String PURCHASE_FIELD = "Número de orden de compra";
+
+	public static final String INIT_NOTIFICATION_FIELD = "Fecha de Inicio Notificaciones";
+	public static final String END_NOTIFICATION_FIELD = "Fecha de Inicio Notificaciones";
+	
+	public static final Integer TYPE_NOTIFICATION_EMAIL = 1;
+	public static final Integer TYPE_NOTIFICATION_SMS = 2;
+	
+	public static final String ORDER_NOTIFY_NOT_FOUND = "No se encontró ordenes para notificar";
+	public static final String FIRTSSTATEORDER = "1";
+}

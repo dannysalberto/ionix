@@ -1,0 +1,42 @@
+package com.ionix.testdev;
+
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+
+import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.http.MediaType;
+import org.springframework.test.web.servlet.MockMvc;
+
+import com.ionix.testdev.dto.UserDTO;
+
+import ch.qos.logback.core.status.Status;
+
+@SpringBootTest
+class TestdevApplicationTests {
+
+	
+	@Autowired
+	private MockMvc mockMvc;
+	
+	
+	@Test
+	void saveUser() {
+		UserDTO user = new UserDTO();
+		user.setEmail("dannysmuria@hotmail.com");
+		user.setName("Dannys Muria");
+		user.setPhone("04124579238");
+		
+		mockMvc.perform(post("/users/create").contentType(MediaType.APPLICATION_JSON))
+			.andExpect(status().isOk())
+			.andExpect(content().contentType(MediaType.APPLICATION_JSON)));
+		
+		
+	}
+
+	
+	
+}

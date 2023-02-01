@@ -1,0 +1,7 @@
+package com.ionix.testdev.utils;
+
+public class TokenUtils {
+
+	private String ACCESS_KEY_TOKEY = "482fe36cb1f40fddce8ccb19bc7f585d";
+	
+}

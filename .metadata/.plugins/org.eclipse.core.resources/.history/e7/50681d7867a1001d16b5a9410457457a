@@ -1,0 +1,39 @@
+package com.ionix.testdev.business;
+
+import java.util.List;
+import java.util.Optional;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Component;
+
+import com.ionix.testdev.common.CommonConstants;
+import com.ionix.testdev.dto.UserDTO;
+import com.ionix.testdev.model.User;
+import com.ionix.testdev.responses.GeneralResponse;
+import com.ionix.testdev.responses.UserResponse;
+import com.ionix.testdev.services.CipherService;
+import com.ionix.testdev.services.UserService;
+import com.ionix.testdev.utils.ConvertDTO;
+
+@Component
+public class ValidationRUTBusinnes {
+
+	@Autowired
+	CipherService cipherService;
+	
+	@Autowired
+	ConvertDTO convertDTO;
+
+	
+	@SuppressWarnings("unchecked")
+	public ResponseEntity<?> getRUTValidate() {
+		
+		
+		
+	}
+	
+	
+	
+}

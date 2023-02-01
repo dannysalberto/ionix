@@ -1,0 +1,22 @@
+package com.ionix.testdev.dto;
+
+public class Detail{
+    public String email;
+    public String phoneNumber;
+}
+
+public class Item{
+    public String name;
+    public Detail detail;
+}
+
+public class Result{
+    public ArrayList<Item> items;
+}
+
+public class ResponseRUTValidation{
+    public int responseCode;
+    public String description;
+    public Result result;
+}
+

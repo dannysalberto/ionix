@@ -1,0 +1,49 @@
+package com.ionix.testdev.services;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.ionix.testdev.dao.UserRepository;
+import com.ionix.testdev.dto.UserDTO;
+import com.ionix.testdev.interfaces.IUser;
+import com.ionix.testdev.model.User;
+
+@Service
+public class UserService implements IUser{
+	
+	
+	@Autowired
+	UserRepository repo;
+
+	@Override
+	public User saveUser(UserDTO user) {
+		// TODO Auto-generated method stub
+		User userToSave = User.builder()
+				.email(user.getEmail())
+				.name(user.getName())
+				.phone(user.getPhone())
+				.build();
+		return repo.save(userToSave);
+	}
+
+	@Override
+	public List<UserDTO> listUsers() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public User getUserByEmail(String email) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public boolean deleteUser(String id) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+}

@@ -1,0 +1,10 @@
+spring.datasource.driverClassName=com.mysql.cj.jdbc.Driver
+spring.datasource.url = jdbc:mysql://localhost:3306/testdev?serverTimezone=UTC
+spring.datasource.username = root
+spring.datasource.password = 
+spring.jpa.properties.hibernate.show_sql=true
+spring.jpa.hibernate.ddl-auto = create
+server.servlet.contextPath= /v1.0/testdev-ws
+logging.level.org.springframework.security=TRACE
+spring.security.user.name=admin
+spring.security.user.password=ionixdev

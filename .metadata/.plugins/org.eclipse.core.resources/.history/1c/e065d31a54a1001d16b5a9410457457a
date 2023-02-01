@@ -1,0 +1,6 @@
+package com.ionix.testdev.services;
+
+@Service
+public class CipherService {
+
+}

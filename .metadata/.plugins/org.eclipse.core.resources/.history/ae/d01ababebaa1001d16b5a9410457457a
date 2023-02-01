@@ -1,0 +1,97 @@
+package com.ionix.testdev;
+
+import static org.hamcrest.CoreMatchers.any;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+
+import org.assertj.core.util.Arrays;
+import org.junit.jupiter.api.Test;
+import org.mockito.stubbing.OngoingStubbing;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
+import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
+import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.util.Base64Utils;
+
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.ionix.testdev.business.UserBusinnes;
+import com.ionix.testdev.controllers.UserController;
+import com.ionix.testdev.dto.UserDTO;
+import com.ionix.testdev.model.User;
+import com.ionix.testdev.services.UserService;
+import com.ionix.testdev.utils.ConvertDTO;
+
+import ch.qos.logback.core.status.Status;
+
+
+//@SpringBootTest
+@AutoConfigureMockMvc
+@WebMvcTest(UserBusinnes.class)
+class UserControllerTests {
+
+	
+	@Autowired
+	private MockMvc mockMvc;
+	
+	@MockBean
+	private UserService userService;
+		
+	@MockBean
+	ConvertDTO convertDTO;
+
+	@Test
+	void saveUser() throws Exception {
+		UserDTO user = new UserDTO();
+		user.setEmail("dannysmuria11@hotmail.com");
+		user.setName("Dannys Muria");
+		user.setPhone("04124579238");
+		
+		ObjectMapper mapper = new ObjectMapper();
+		HttpHeaders headers = new HttpHeaders();
+		headers.add("user", "admin");
+		headers.add("password", "ionixdev");
+				
+		mockMvc.perform(post("/users/create").contentType(MediaType.APPLICATION_JSON)
+                .accept(MediaType.APPLICATION_JSON)
+				.header(HttpHeaders.AUTHORIZATION,"Basic " + Base64Utils.encodeToString("admin:ionixdev".getBytes()))
+				.content(mapper.writeValueAsString(user)))
+			.andExpect(status().isOk());
+
+		verify(userService).saveUser(user);
+
+		
+	}
+	
+	@Test
+	void listUser() throws Exception {
+	
+		List<User> userList = new ArrayList<>();
+		userList.add(new User(1, "Dannys Muria","dannysmuria@hotmail.com","04124579238", new Date()));
+		when(userService.listUsers())
+	    .thenReturn(userList);
+	 
+					
+		mockMvc.perform(get("/users/list").contentType(MediaType.APPLICATION_JSON)
+				.header(HttpHeaders.AUTHORIZATION,"Basic " + Base64Utils.encodeToString("admin:ionixdev".getBytes())))
+			.andExpect(status().isOk())
+			.andExpect(content().contentType(MediaType.APPLICATION_JSON));
+		
+		
+	}
+
+	
+	
+}

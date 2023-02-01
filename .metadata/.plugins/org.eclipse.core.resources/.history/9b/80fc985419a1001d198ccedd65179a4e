@@ -1,0 +1,8 @@
+package com.ionix.testdev.auth;
+
+public class Snippet {
+	public static void main(String[] args) {
+		JWTAutheticationFilter
+	}
+}
+

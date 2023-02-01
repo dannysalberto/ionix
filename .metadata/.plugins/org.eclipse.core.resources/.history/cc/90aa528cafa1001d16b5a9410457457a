@@ -1,0 +1,64 @@
+package com.ionix.testdev;
+
+import static org.mockito.Mockito.verify;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+
+import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
+import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.util.Base64Utils;
+
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.ionix.testdev.dto.UserDTO;
+import com.ionix.testdev.services.UserService;
+
+import ch.qos.logback.core.status.Status;
+
+
+@SpringBootTest
+@AutoConfigureMockMvc
+class TestdevApplicationTests {
+
+	
+	@Autowired
+	private MockMvc mockMvc;
+	
+	@MockBean
+	private UserService userService;
+	
+	
+	@Test
+	void saveUser() throws Exception {
+		UserDTO user = new UserDTO();
+		user.setEmail("dannysmuria@hotmail.com");
+		user.setName("Dannys Muria");
+		user.setPhone("04124579238");
+		
+		ObjectMapper mapper = new ObjectMapper();
+		HttpHeaders headers = new HttpHeaders();
+		headers.add("user", "admin");
+		headers.add("password", "ionixdev");
+		
+		System.out.println(mapper.writeValueAsString(user));
+		
+		mockMvc.perform(post("/users/creates").contentType(MediaType.APPLICATION_JSON)
+				.header(HttpHeaders.AUTHORIZATION,
+	                    "Basic " + Base64Utils.encodeToString("admin:ionixdev".getBytes()))
+				.content(mapper.writeValueAsString(user)))
+			.andExpect(status().isOk())
+			.andExpect(content().contentType(MediaType.APPLICATION_JSON));
+		
+		verify(userService).saveUser(user);
+		
+	}
+
+	
+	
+}

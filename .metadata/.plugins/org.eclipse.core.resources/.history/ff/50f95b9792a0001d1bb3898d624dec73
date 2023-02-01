@@ -1,0 +1,26 @@
+package com.ionix.testdev.utils;
+
+import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
+
+import org.springframework.beans.factory.annotation.Value;
+
+public class TokenUtils {
+
+	private String ACCESS_KEY_TOKEY = "482fe36cb1f40fddce8ccb19bc7f585d";
+	
+	@Value("${ACCESS_TIME_EXPIRED_SECONDS}")
+	private static long ACCESS_TIME_EXPIRED_SECONDS;
+	
+	public static String createToken(String name, String email) {
+		
+		long expirationTime = ACCESS_TIME_EXPIRED_SECONDS * 1000;
+		Date expirationDate = new Date ( System.currentTimeMillis() + expirationTime);
+		
+		Map<String, String> claims = new HashMap<>();
+		claims.put("name", name);
+		
+		
+	}
+}

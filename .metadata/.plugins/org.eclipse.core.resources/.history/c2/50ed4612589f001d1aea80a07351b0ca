@@ -1,0 +1,23 @@
+package com.ionix.testdev.dto;
+
+
+
+import lombok.Builder;
+import lombok.Data;
+
+@Data
+@Builder
+public class UserDTO {
+	
+	@NotEmpty(message = CommonConstants.NIT_FIELD + CommonConstants.NOT_EMPTY_NOT_NULL)
+	private String name;
+	
+	@NotEmpty(message = CommonConstants.NIT_FIELD + CommonConstants.NOT_EMPTY_NOT_NULL)
+	@Email(message = CommonConstants.NIT_FIELD + CommonConstants.NOT_EMPTY_NOT_NULL)
+	private String email;
+	
+	@NotEmpty(message = CommonConstants.NIT_FIELD + CommonConstants.NOT_EMPTY_NOT_NULL)
+	private String phone;
+	
+
+}

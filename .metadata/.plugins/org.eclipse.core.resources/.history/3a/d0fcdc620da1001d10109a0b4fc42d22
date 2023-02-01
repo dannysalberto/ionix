@@ -1,0 +1,11 @@
+package com.colsubsidio.security.dtos;
+
+import lombok.Data;
+
+@Data
+public class AuthCredentials {
+
+	private String user;
+	
+	private String password;
+}

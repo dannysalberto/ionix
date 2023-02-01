@@ -1,0 +1,54 @@
+package com.ionix.testdev.business;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Component;
+
+import com.ionix.testdev.common.CommonConstants;
+import com.ionix.testdev.model.User;
+import com.ionix.testdev.responses.GeneralResponse;
+import com.ionix.testdev.responses.UserResponse;
+import com.ionix.testdev.services.UserService;
+import com.ionix.testdev.utils.ConvertDTO;
+
+@Component
+public class UserBusinnes {
+
+	@Autowired
+	UserService serviceUser;
+	
+	@Autowired
+	ConvertDTO convertDTO;
+
+	
+	@SuppressWarnings("unchecked")
+	public ResponseEntity<?> list() {
+		
+		List<User> users = serviceUser.listUsers(); 
+		if (orders.getTotal()>=1)
+			return new ResponseEntity<GeneralResponse<?>>(GeneralResponse.<PageDto<OrderResponse>>builder()
+					.body(orders)
+					.code(CommonConstants.SUCCESS_CODE)
+					.message(CommonConstants.SUCCESS_MESSAGE).success(true).build(), 
+					HttpStatus.OK);				
+		
+		
+		logs.info("app-med-purchaseorder-api PurchaseOrderBusiness->findOrderAlls La consulta de la página {} con limite de {} registros, resultó vacia", page, limit);
+		return returnNotFound();				
+
+		return convertDTO.get(users, UserResponse.class);
+		
+	}
+	
+	@SuppressWarnings("rawtypes")
+	private ResponseEntity<?> returnNotFound() {
+		return new ResponseEntity<GeneralResponse>(GeneralResponse.builder()
+					.code(CommonConstants.NOTFOUND_CODE)
+					.message(CommonConstants.NOTFOUND_MESSAGE).build(),
+					HttpStatus.NOT_FOUND);
+	}
+	
+}

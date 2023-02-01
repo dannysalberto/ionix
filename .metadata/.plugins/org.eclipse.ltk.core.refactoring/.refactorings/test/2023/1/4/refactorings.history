@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename package &apos;com.ionix.test&apos; to &apos;com.ionix&apos;&#x0D;&#x0A;- Original project: &apos;test&apos;&#x0D;&#x0A;- Original element: &apos;test/src/main/java/com.ionix.test&apos;&#x0D;&#x0A;- Renamed element: &apos;test/src/main/java/com.ionix&apos;&#x0D;&#x0A;- Update references to refactored element&#x0D;&#x0A;- Update textual occurrences in comments and strings" description="Rename package &apos;com.ionix.test&apos;" flags="589830" hierarchical="false" id="org.eclipse.jdt.ui.rename.package" input="/src\/main\/java=/gradle_scope=/main=/=/gradle_used_by_scope=/main,test=/&lt;com.ionix.test" name="com.ionix" qualified="false" references="true" stamp="1674942288900" textual="false" version="1.0"/>
+</session>

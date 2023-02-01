@@ -1,0 +1,111 @@
+package com.ionix.testdev.config;
+
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
+import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.config.http.SessionCreationPolicy;
+import org.springframework.security.core.userdetails.User;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.provisioning.InMemoryUserDetailsManager;
+import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.CorsConfigurationSource;
+import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
+
+
+//@EnableWebSecurity
+public class WebSecurityConfig  {
+	
+	
+	@Autowired
+	public void configureGlobal(AuthenticationManagerBuilder auth, PasswordEncoder passwordEncoder) throws Exception {
+	    auth.inMemoryAuthentication()
+	      .withUser("user")
+	      .password(passwordEncoder.encode("password"))
+	      .roles("USER");
+	}
+	
+	@Bean
+	public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+	    http
+	      .csrf().disable()
+	      .authorizeRequests()
+	      .antMatchers("/v3/api-docs/**",
+	        "/swagger-ui/**",
+	        "/swagger-ui.html").permitAll()
+	      .anyRequest().authenticated()
+	      .and()
+	      .formLogin()
+	      .defaultSuccessUrl("/foos");
+	    return http.build();
+	}
+	
+	/**@Bean
+	SecurityFilterChain filterChain(HttpSecurity http , AuthenticationManager authManager) throws Exception {
+		
+			return http
+				.csrf().disable()
+				.authorizeRequests()
+				.antMatchers("/users/list","/users/getbyemail/*").permitAll()
+				.antMatchers("/v2/api-docs", "/configuration/**", "/swagger*/**", "/webjars/**").permitAll()
+				.anyRequest()
+				.authenticated()
+				.and()
+				.httpBasic()
+				.and()
+				.sessionManagement()
+				.sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+				.and()
+				.cors().and()
+				.build();
+		
+	}
+	
+	
+
+	@Bean
+	UserDetailsService userDetailsService() {
+		InMemoryUserDetailsManager managerUser = new InMemoryUserDetailsManager ();
+		managerUser.createUser(User.withUsername("admin")
+				.password(passwordEncoder().encode("ionixdev"))
+				.roles()
+				.build());
+		return managerUser;
+	}
+	
+	@Bean
+	AuthenticationManager authenticationManager(HttpSecurity http) throws Exception{
+		return http.getSharedObject(AuthenticationManagerBuilder.class)
+				.userDetailsService(userDetailsService())
+				.and().build();
+	}
+	
+	@Bean
+	CorsConfigurationSource corsConfigurationSource() {
+		final UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+		
+		CorsConfiguration config = new CorsConfiguration();
+        config.setAllowCredentials(true);
+        config.addAllowedOrigin("*");
+        config.addAllowedHeader("*");
+        config.addAllowedMethod("*");
+        config.addExposedHeader("Authorization");
+        source.registerCorsConfiguration("/**", config);
+		return source;
+	}
+	
+	@Bean
+	PasswordEncoder passwordEncoder() {
+		return new BCryptPasswordEncoder();
+	}*/
+ 
+	
+	
+}

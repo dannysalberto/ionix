@@ -1,0 +1,8 @@
+package com.ionix.testdev.dto;
+
+
+public class Item{
+    public String name;
+    public Detail detail;
+}
+

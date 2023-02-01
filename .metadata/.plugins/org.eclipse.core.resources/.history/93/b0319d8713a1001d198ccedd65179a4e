@@ -1,0 +1,37 @@
+package com.ionix.testdev.utils;
+
+import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
+
+import org.springframework.beans.factory.annotation.Value;
+
+import com.ionix.testdev.common.CommonConstants;
+
+import io.jsonwebtoken.Jwts;
+import io.jsonwebtoken.SignatureAlgorithm;
+import io.jsonwebtoken.security.Keys;
+
+public class TokenUtils {
+
+
+	@Value("${ACCESS_TIME_EXPIRED_SECONDS}")
+	private static long ACCESS_TIME_EXPIRED_SECONDS;
+	
+	public static String createToken(String name, String email) {
+		
+		long expirationTime = ACCESS_TIME_EXPIRED_SECONDS * 1000;
+		Date expirationDate = new Date ( System.currentTimeMillis() + expirationTime);
+		
+		Map<String, String> claims = new HashMap<>();
+		claims.put("name", name);
+		
+		return Jwts.builder().setClaims(claims).
+				setIssuedAt(new Date()).setIssuer(CommonConstants.ISSUER_INFO)
+		.setSubject(email)	
+		.setExpiration(expirationDate)
+		.signWith(Keys.hmacShaKeyFor(CommonConstants.ACCESS_KEY_TOKEY.getBytes())).compact();
+		
+		
+	}
+}

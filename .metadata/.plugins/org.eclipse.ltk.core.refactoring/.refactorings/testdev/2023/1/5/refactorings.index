@@ -1,0 +1,25 @@
+1675014003683	Extract method 'responseTrue'
+1675126095730	Delete element
+1675126100507	Delete element
+1675129792763	Delete element
+1675129797970	Delete element
+1675134651076	Delete element
+1675134720787	Delete element
+1675135193880	Delete element
+1675136568396	Delete element
+1675136697189	Rename type 'JWTAutheticationFilter'
+1675160544046	Delete element
+1675161139724	Rename type 'JWTAutheticationFilter'
+1675169876576	Rename compilation unit 'sasa.java'
+1675169909777	Copy compilation unit
+1675169914739	Copy compilation unit
+1675169919684	Copy compilation unit
+1675170059154	Copy compilation unit
+1675171064755	Copy compilation unit
+1675171436135	Rename type 'ValidationRUTBusinnes'
+1675171449895	Rename type 'RUTValidationBusinnes'
+1675171457987	Rename type 'RUTValidationController'
+1675172559913	Extract method 'serviceConsume'
+1675173379913	Extract method 'mapperResponse'
+1675173811044	Rename type 'ResultResponse'
+1675202301229	Copy compilation unit

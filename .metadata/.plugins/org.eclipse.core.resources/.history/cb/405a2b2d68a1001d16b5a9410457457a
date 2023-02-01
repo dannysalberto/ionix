@@ -1,0 +1,14 @@
+package com.ionix.testdev.responses;
+
+public class ResultResponse {
+
+	public String responseCode;
+    public String description;
+    public int elapsedTime;
+    public Result result;
+}
+
+public class Result{
+    public int registerCount;
+}
+

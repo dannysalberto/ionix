@@ -1,0 +1,6 @@
+package com.ionix.testdev.dto;
+
+
+public class Result{
+    public ArrayList<Item> items;
+}

@@ -1,0 +1,15 @@
+package com.ionix.testdev.interfaces;
+
+import java.util.List;
+
+import com.ionix.testdev.dto.UserDTO;
+import com.ionix.testdev.model.User;
+
+public interface IUser {
+	
+	User saveUser(UserDTO user);
+	List<UserDTO> listUsers();
+	User getUserByEmail(String email);
+	boolean deleteUser(String id);
+
+}

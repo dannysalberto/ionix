@@ -1,0 +1,31 @@
+package com.ionix.testdev.model;
+
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Table;
+import javax.persistence.Id;
+import org.hibernate.annotations.GenericGenerator;
+
+@Entity
+@Table(name="users")
+public class User {
+	
+	@Id
+	@GeneratedValue(generator = "UUID")
+	@GenericGenerator(name="UUID", strategy = "org.hibernate.id.UUIDGenerator")
+	@Column(nullable = false, length = 36)
+	private String Id;
+	
+	@Column(nullable = false, length = 50)
+	private String name;
+	
+	@Column(nullable = false, length = 50)
+	private String email;
+	
+	@Column(nullable = false, length = 15)
+	private String phone;
+	
+
+}
